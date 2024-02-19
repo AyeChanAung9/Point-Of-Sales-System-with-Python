@@ -1,0 +1,16 @@
+/* Add a red background color to navigation links on hover */
+.nav-item a:hover {
+	background-color: rgb(0, 153, 255);
+}
+
+.navbar {
+	z-index: 1001;
+}
+
+.dropdown:hover>.dropdown-menu {
+	display: block;
+}
+
+.dropdown>.dropdown-toggle:active {
+	pointer-events: none;
+}

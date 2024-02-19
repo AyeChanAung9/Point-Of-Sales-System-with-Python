@@ -1,0 +1,60 @@
+{% extends 'layout/layout_receive.html' %}
+{% block title %}Damage/Loss{% endblock %}
+
+{% block heading %}Damage/Loss{% endblock %}
+
+{% block form_url %}{{ url_for('inventory.get_inventory_damage_loss_voucher') }}{% endblock %}
+{% block form_id %}damage_loss_voucher{% endblock %}
+{% block form_name %}Add Damage/Loss Voucher{% endblock %}
+
+{% block list_title %}History{% endblock %}
+{% block table_header %}
+<tr>
+    <th>No</th>
+    <th>Voucher No</th>
+    <th>Transaction Date</th>
+    <th class="text-end">Total Items</th>
+    <th>User Name</th>
+    <th>Action</th>
+</tr>
+{% endblock %}
+{% block table_footer %}
+<tr>
+    <th>No</th>
+    <th>Voucher No</th>
+    <th>Transaction Date</th>
+    <th class="text-end">Total Items</th>
+    <th>User Name</th>
+    <th>Action</th>
+</tr>
+{% endblock %}
+{% block table_body %}{% endblock %}
+{% block detail_list_title %}Damage Loss Details {% endblock %}
+{% block detail_table_header %}
+<tr>
+    <th>No</th>
+    <th>Item Name</th>
+    <th>Category</th>
+    <th class="text-end">Price</th>
+    <th class="text-end">Qty</th>
+    <th class="text-end">Reorder Limit</th>
+    <th>Remark</th>
+</tr>
+{% endblock %}
+{% block detail_table_footer %}
+<tr>
+    <th>No</th>
+    <th>Item Name</th>
+    <th>Category</th>
+    <th class="text-end">Price</th>
+    <th class="text-end">Qty</th>
+    <th class="text-end">Reorder Limit</th>
+    <th>Remark</th>
+</tr>
+{% endblock %}
+{% block detail_table_body %}{% endblock %}
+
+{% block js %}
+<script type="module" src="{{ url_for('static', filename='js/damage_loss.js') }}"></script>
+<script src="{{ url_for('static', filename='js/datepicker.js') }}"></script>
+{% endblock %}

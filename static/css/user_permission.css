@@ -1,0 +1,33 @@
+.user_permission_page {
+    width: 100%;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+}
+
+.user_permission_page .card .card-body {
+    width: 680px;
+    background: transparent;
+    color: black;
+    padding: 0;
+}
+
+.user_permission_page .card .card-body .check-list {
+    align-items: center;
+    margin: 0 10px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.row .col .checkbox {
+    margin-left: 8px;
+}
+
+input[type=checkbox] {
+    transform: scale(1.5);
+}

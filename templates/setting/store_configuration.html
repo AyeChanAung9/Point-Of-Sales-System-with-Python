@@ -1,0 +1,47 @@
+{% extends 'layout/base.html' %}
+<h1>{% block title %}Store Configuration{% endblock %}</h1>
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/store_configuration.css') }}" />
+{% endblock %}
+{% block content %}
+<div class="upload-store-data text-center">
+    <div class="upload-store-data-frame">
+        <form method="POST" enctype="multipart/form-data" id="formStore">
+            <div class="upload-store-photo">
+                <img id="logo_image">
+                <div class="upload-photo-btn">
+                    <input type="file" name="file">
+                    <i class="fa-solid fa-camera" style="color: #ffffff;"></i>
+                </div>
+            </div>
+
+            <div class="form-floating input-box mb-3">
+                <input type="text" class="form-control" id="storename" name="storename" placeholder="Store Name"
+                    required>
+                <label for="storename">Store Name</label>
+            </div>
+            <div class="form-floating input-box mb-3">
+                <input type="text" class="form-control" id="contactperson" name="contactperson"
+                    placeholder="Contact Person" required>
+                <label for="contactperson">Contact Person</label>
+            </div>
+            <div class="form-floating input-box mb-3">
+                <input type="text" class="form-control" id="phonenumber" name="phonenumber" placeholder="Phone No."
+                    required>
+                <label for="phonenumber">Phone No.</label>
+            </div>
+            <div class="form-floating input-box mb-3">
+                <input type="text" class="form-control" id="address" name="address" placeholder="Address" required>
+                <label for="address">Address</label>
+            </div>
+            <div class="d-flex justify-content-center py-3">
+                <button type="submit" class="btn btn-outline-success">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/store_configuration.js') }}"></script>
+{% endblock %}

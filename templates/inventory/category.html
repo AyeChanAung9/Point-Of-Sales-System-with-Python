@@ -1,0 +1,34 @@
+{% extends 'layout/layout_setup.html' %}
+{% block title %}Category{% endblock %}
+
+{% block heading %}Category{% endblock %}
+
+{% block form_title %}Add Category{% endblock %}
+{% block hidden_id %}category_id{% endblock %}
+{% block form_content %}
+<div class="col-lg-6 col-12 form-floating mb-3 mx-auto ps-0">
+    <input type="text" class="form-control" id="category_name" placeholder="Category Name" required />
+    <label for="category_name"><i class="fab fa-product-hunt"></i>&nbsp;&nbsp; Category Name</label>
+</div>
+
+{% endblock %}
+
+{% block list_title %}Category List{% endblock %}
+{% block table_header %}
+<tr>
+    <th>No</th>
+    <th>Category Name</th>
+    <th>Action</th>
+</tr>
+{% endblock %}
+{% block table_footer %}
+<tr>
+    <th>No</th>
+    <th>Category Name</th>
+    <th>Action</th>
+</tr>
+{% endblock %}
+{% block table_body %}{% endblock %}
+
+{% block js %}
+<script type="module" src="{{ url_for('static', filename='js/category.js') }}"></script>{% endblock %}

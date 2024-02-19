@@ -1,0 +1,57 @@
+.upload-store-data {
+	width: 400px;
+	background: white;
+	backdrop-filter: blur(20px);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	border-radius: 20px;
+	padding: 30px 40px;
+	position: relative;
+	margin: 50px auto;
+}
+
+.upload-store-data .upload-store-photo {
+	width: 123px;
+	position: relative;
+	margin: auto auto 50px;
+	height: 125px;
+}
+
+.upload-store-photo img {
+	border-radius: 50%;
+	border: 2px solid rgba(255, 255, 255, 0.2);
+	width: 130px;
+	height: 130px;
+}
+
+.upload-store-photo .upload-photo-btn {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background: #00B4FF;
+	width: 32px;
+	height: 32px;
+	line-height: 33px;
+	text-align: center;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.upload-store-photo .upload-photo-btn input[type='file'] {
+	position: absolute;
+	transform: scale(2);
+	opacity: 0;
+}
+
+input[type=file]::-webkit-file-upload-button {
+	cursor: pointer;
+}
+
+.upload-store-data-frame {
+	position: relative;
+}
+
+.input-box input {
+	background: transparent;
+	border-radius: 10px;
+	padding: 20px 45px 20px 20px;
+}

@@ -1,0 +1,163 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
+}
+
+body {
+	background-color: #f5f5f5;
+	overflow-x: hidden;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 2em 1em;
+	justify-content: center;
+	text-align: center;
+}
+
+.column {
+	width: calc(20% - 1em);
+	padding: 0.5em 0;
+	flex: 0 0 20%;
+	/* Adjusted flex basis */
+	max-width: 20%;
+	/* Adjusted max width */
+}
+
+h1 {
+	width: 100%;
+	text-align: center;
+	font-size: 3.5em;
+	color: #1f003b;
+}
+
+.card {
+	box-shadow: 0 0 2.4em rgba(25, 0, 58, 0.1);
+	padding: 3.5em 1em;
+	border-radius: 0.6em;
+	color: #1f003b;
+	cursor: pointer;
+	transition: 0.3s;
+	background-color: #ffffff;
+}
+
+.card .img-container {
+	width: 8em;
+	height: 8em;
+	background-color: #a993ff;
+	padding: 0.5em;
+	border-radius: 50%;
+	margin: 0 auto 1em auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+.card img {
+	max-width: 100%;
+	max-height: 100%;
+	border-radius: 50%;
+	object-fit: cover;
+	object-position: center center;
+}
+
+.card h3 {
+	font-weight: 500;
+	font-size: 1.5em;
+	/* Adjust the font size */
+	line-height: 1.2;
+}
+
+.card p {
+	font-weight: 300;
+	text-transform: uppercase;
+	margin: 0.5em 0 2em 0;
+	letter-spacing: 2px;
+}
+
+.icons {
+	width: 50%;
+	min-width: 180px;
+	margin: auto;
+	display: flex;
+	justify-content: space-between;
+}
+
+.card a {
+	text-decoration: none;
+	color: inherit;
+	font-size: 1.4em;
+}
+
+.card:hover {
+	background: linear-gradient(#6045ea, #8567f7);
+	color: #ffffff;
+}
+
+.card:hover .img-container {
+	transform: scale(1.15);
+}
+
+@media screen and (min-width:768px) {
+	.column {
+		flex: 0 0 20%;
+		max-width: 20%;
+		padding: 0 0.5em;
+	}
+
+	section {
+		padding: 1em 5em;
+	}
+
+}
+
+@media screen and (min-width:992px) {
+	.column {
+		flex: 0 0 20%;
+		max-width: 20%;
+		padding: 0 0.5em;
+	}
+
+	section {
+		padding: 1em;
+	}
+
+	.card {
+		padding: 3.5em 1em;
+	}
+
+}
+
+@media screen and (max-width:1200px) {
+	.column {
+		flex: 0 0 25%;
+		max-width: 25%;
+		padding: 0 0.5em;
+		margin-bottom: 1em;
+	}
+
+}
+
+@media screen and (max-width:992px) {
+	.column {
+		flex: 0 0 33.33%;
+		max-width: 33.33%;
+		padding: 0 0.5em;
+		margin-bottom: 1em;
+	}
+
+}
+
+@media screen and (max-width:768px) {
+	.column {
+		flex: 0 0 50%;
+		max-width: 50%;
+		padding: 0 0.5em;
+		margin-bottom: 1em;
+	}
+
+}

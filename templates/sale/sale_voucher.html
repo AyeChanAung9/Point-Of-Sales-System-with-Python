@@ -1,0 +1,129 @@
+{% extends 'layout/layout_voucher.html' %}
+
+{% block title %}
+{% if editing %}
+Edit Sale Voucher
+{% else %}
+Sale Voucher
+{% endif %}
+{% endblock %}
+
+{% block hidden_id %}sale_id{% endblock %}
+{% block hidden_value %}{% if editing %}{{ sale[0].sale_id }}{% endif %}{% endblock %}
+
+{% block hidden_login_user_id %}login_user_id{% endblock %}
+{% block hidden_login_user_value %}{{user_id_session}}{% endblock %}
+
+{% block form_event %}
+{% if editing %}
+onsubmit="updateSaleVoucher(event)"
+{% else %}
+onsubmit="saveSaleVoucher(event)"
+{% endif %}
+{% endblock %}
+
+{% block back_url %}
+{{ url_for('sale.sale') }}
+{% endblock %}
+{% block back_url_name %}
+Sale history
+{% endblock %}
+
+{% block voucher_no %}{% if editing %}{{ sale[0].voucher_no }}{% endif %}{% endblock %}
+
+{% block date %}{% if editing %}{{ sale[0].tran_date }}{% endif %}{% endblock %}
+
+{% block table_header %}
+<tr>
+    <th>Code</th>
+    <th colspan="4">Name</th>
+    <th>Category</th>
+    <th class="text-end">Price</th>
+    <th class="width-sm text-end">Qty</th>
+    <th class="text-end">Total</th>
+    <th></th>
+</tr>
+{% endblock %}
+{% block table_body %}
+{% if editing %}
+{% for detail in details %}
+<tr>
+    <td>{{ detail.product_code }}</td>
+    <td colspan="4">{{ detail.name }}</td>
+    <td>{{ detail.category_name }}</td>
+    <td class="text-end">{{ detail.price }}</td>
+    <td><input type="number" class="form-control text-end" min="1" onkeyup="changeTotalsByQty(this)"
+            onclick="changeTotalsByQty(this)" pattern="[0-9]*" value="{{ detail.qty }}"></td>
+    <td class="width-sm text-end">{{ detail.price * detail.qty }}</td>
+    <td hidden="true">{{ detail.item_id }}</td>
+    <td hidden="true">{{ detail.sale_details_id }}</td>
+    <td class="text-center">
+        <a class="delete" title="Delete" data-toggle="tooltip" type="button" onclick="removeItemFromTable(this)"><i
+                class="fas fa-trash red-icon"></i></a>
+    </td>
+</tr>
+{% endfor %}
+{% endif %}
+{% endblock %}
+{% block total_items %}
+{% if editing %}{{ sale[0].total_items }}{% else %}0{% endif %}
+{% endblock %}
+{% block sub_total %}
+<div class="row text-end p-3">
+    <div class="col">
+        <label>Sub-Total :</label>
+        <input type="text" class="text-end" id="sub_total" disabled width="100px">
+    </div>
+</div>
+<div class="row text-end p-3">
+    <div class="col">
+        <label>Discount (%) :</label>
+        <input type="number" class="text-end" id="discount_percentage" pattern="[0-9]*"
+            value="{% if editing %}{{ sale[0].discount_percentage }}{% else %}0{% endif %}"
+            onchange="getDiscount(this.value)">
+    </div>
+</div>
+<div class="row text-end p-3">
+    <div class="col">
+        <label>Discount :</label>
+        <input type="text" class="text-end" id="discount" disabled>
+    </div>
+</div>
+<div class="row text-end p-3">
+    <div class="col">
+        <label>Total :</label>
+        <input type="text" class="text-end" disabled id="totals">
+    </div>
+</div>
+<div class="row text-end p-3">
+    <div class="col">
+        <label>Payment Type :</label>
+        <select class="form-select float-end ms-1 py-1" aria-label="Filter select" id="payment" style="width: 190px;"
+            required>
+            {% if editing %}
+            <option value="crdp" {{ payment_type.crdp }}>Card Payment</option>
+            <option value="cshp" {{ payment_type.cshp }}>Cash Payment</option>
+            <option value="dgtp" {{ payment_type.dgtp }}>Digital Payment</option>
+            {% else %}
+            <option value="" selected disabled> ---- payment ---- </option>
+            <option value="crdp">Card Payment</option>
+            <option value="cshp">Cash Payment</option>
+            <option value="dgtp">Digital Payment</option>
+            {% endif %}
+        </select>
+    </div>
+</div>
+{% endblock %}
+
+{% block button %}
+{% if not editing %}
+<button class="btn btn-outline-secondary" type="button" onclick="clearAllInfo()">Cancel</button>
+{% endif %}
+<button class="btn btn-outline-success" type="submit" id="{% if editing %}update{% else %}save{% endif %}_voucher">
+    {% if editing %}Update{% else %}Save{% endif %} Voucher
+</button>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/sale_voucher.js') }}"></script>
+{% endblock %}

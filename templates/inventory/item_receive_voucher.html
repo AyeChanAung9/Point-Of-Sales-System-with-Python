@@ -1,0 +1,83 @@
+{% extends 'layout/layout_voucher.html' %}
+
+{% block title %}
+{% if editing %}
+Edit Item Receive Voucher
+{% else %}
+Item Receive Voucher
+{% endif %}
+{% endblock %}
+
+{% block hidden_id %}item_receive_id{% endblock %}
+{% block hidden_value %}{% if editing %}{{ item_receive[0].item_receive_id }}{% endif %}{% endblock %}
+
+{% block hidden_login_user_id %}login_user_id{% endblock %}
+{% block hidden_login_user_value %}{{user_id_session}}{% endblock %}
+
+{% block form_event %}
+{% if editing %}
+onsubmit="updateItemReceiveVoucher(event)"
+{% else %}
+onsubmit="saveItemReceiveVoucher(event)"
+{% endif %}
+{% endblock %}
+
+{% block back_url %}
+{{ url_for('inventory.get_inventory_item_receive') }}
+{% endblock %}
+{% block back_url_name %}
+Item Receive History
+{% endblock %}
+
+{% block voucher_no %}{% if editing %}{{ item_receive[0].voucher_no }}{% endif %}{% endblock %}
+
+{% block date %}{% if editing %}{{ item_receive[0].tran_date }}{% endif %}{% endblock %}
+
+{% block table_header %}
+<tr>
+    <th>Code</th>
+    <th colspan="4">Name</th>
+    <th>Category</th>
+    <th class="width-sm text-end">Qty</th>
+    <th></th>
+</tr>
+{% endblock %}
+{% block table_body %}
+{% if editing %}
+{% for detail in details %}
+<tr>
+    <td>{{ detail.product_code }}</td>
+    <td colspan="4">{{ detail.name }}</td>
+    <td>{{ detail.category_name }}</td>
+    <td><input type="number" class="form-control text-end" min="1" value="{{ detail.qty }}" pattern="[0-9]*"></td>
+    <td hidden="true">{{ detail.item_id }}</td>
+    <td hidden="true">{{ detail.item_receive_details_id }}</td>
+    <td class="text-center">
+        <a class="delete" title="Delete" data-toggle="tooltip" type="button" onclick="removeItemFromTable(this)"><i
+                class="fas fa-trash red-icon"></i></a>
+    </td>
+</tr>
+{% endfor %}
+{% endif %}
+{% endblock %}
+
+{% block total_items %}
+{% if editing %}
+{{ item_receive[0].total_items }}
+{% else %}
+0
+{% endif %}
+{% endblock %}
+
+{% block button %}
+{% if not editing %}
+<button class="btn btn-outline-secondary" type="button" onclick="clearAllInfo()">Cancel</button>
+{% endif %}
+<button class="btn btn-outline-success" type="submit" id="{% if editing %}update{% else %}save{% endif %}_voucher">
+    {% if editing %}Update{% else %}Save{% endif %} Voucher
+</button>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/item_receive_voucher.js') }}"></script>
+{% endblock %}

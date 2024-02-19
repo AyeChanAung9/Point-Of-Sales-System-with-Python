@@ -1,0 +1,51 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.login-screen {
+	width: 1440;
+	height: 848;
+	position: relative;
+	background: '#000235';
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background-image: url("/static/img/background.png");
+	background-repeat: round;
+	background-size: cover;
+}
+
+.wrapper {
+	width: 420px;
+	background: transparent;
+	border: 2px solid rgba(255, 255, 255, 0.2);
+	backdrop-filter: blur(20px);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	border-radius: 20px;
+	padding: 30px 40px;
+}
+
+.input-box input {
+	background: transparent;
+	border-radius: 10px;
+	padding: 20px 45px 20px 20px;
+}
+
+.img-container {
+	width: 200px;
+	height: auto;
+	overflow: hidden;
+	margin: 20px 60px 35px;
+}
+
+.img-container img {
+	width: 100%;
+	height: auto;
+	display: block;
+}

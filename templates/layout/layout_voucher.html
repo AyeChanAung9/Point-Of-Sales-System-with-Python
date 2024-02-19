@@ -1,0 +1,82 @@
+{% extends 'layout/base.html' %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/voucher.css') }}" />
+{% endblock %}
+{% block content %}
+
+<input type="hidden" id="{% block hidden_id %}{% endblock %}" value="{% block hidden_value %}{% endblock %}">
+<input type="hidden" id="{% block hidden_login_user_id %}{% endblock %}"
+    value="{% block hidden_login_user_value %}{% endblock %}">
+<form {% block form_event %}{% endblock %}>
+    <div class="shadow p-3 mt-3 mb-5 rounded">
+        <p class="fs-6 mb-3 color-peru">
+            <a href="{% block back_url %}{% endblock %}">
+                <i class="fas fa-angle-double-left me-3"></i>{% block back_url_name %}{% endblock %}
+            </a>
+        </p>
+        <div class="row g-3 mb-3 mt-1">
+            <div class="col-lg-2 col-sm-5 ms-3">
+                <label for="voucherNo" class="form-label ms-3">Voucher No.</label>
+                <input type="text" class="form-control" id="voucherNo" placeholder="eg. A0001" tabindex="1"
+                    value="{% block voucher_no %}{% endblock %}" readonly>
+            </div>
+            <div class="col-lg-2 col-sm-4">
+                <label for="date" class="form-label">Date</label>
+                <input type="text" class="datepicker_input form-control" id="date" placeholder="yyyy-mm-dd" tabindex="2"
+                    required value="{% block date %}{% endblock %}">
+            </div>
+        </div>
+
+        <div class="col-lg-8 rounded-2 mb-3 p-3 ">
+            <div class="row input-group">
+                <div class="col-md-2 me-1">
+                    <select class="form-select" id="selectBy">
+                        <option selected value="code_no">Code No</option>
+                    </select>
+                </div>
+                <input type="text" class="form-control col-md-7" placeholder="Type to add product" id="product_search"
+                    tabindex="3">
+                <div class="col-md-2">
+                    <input type="number" class="form-control text-end" placeholder="Qty" min="1" value=1 id="qty"
+                        pattern="[0-9]*" tabindex="4">
+                </div>
+                <button class="btn btn-primary col-md-1" type="button" id="add_item"
+                    onclick="addItemToTable()">Add</button>
+            </div>
+            {% block additional_form_content %}{% endblock %}
+        </div>
+
+        <div table-responsive>
+            <table class="table table-borderless table-striped table-hover table-fixed align-middle" id="item_table">
+                <thead>
+                    {% block table_header %}{% endblock %}
+                </thead>
+                <tbody id="item_table_body">
+                    {% block table_body %}{% endblock %}
+                </tbody>
+            </table>
+        </div>
+
+        <div id="liveAlertPlaceholder"></div>
+        <div class="card">
+            <div class="card-body text-end">
+                <div class="row">
+                    <div class="col-lg-11">
+                        <p>Total item(s) :</p>
+                    </div>
+                    <div class="col-lg-1 pe-3">
+                        <b id="total_item_count">{% block total_items %}{% endblock %}</b>
+                    </div>
+                </div>
+            </div>
+            {% block sub_total %}{% endblock %}
+        </div>
+
+        <div class="text-end mt-4">
+            {% block button %}
+            {% endblock %}
+        </div>
+    </div>
+</form>
+
+{% endblock %}

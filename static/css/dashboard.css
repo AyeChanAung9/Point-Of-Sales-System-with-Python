@@ -1,0 +1,24 @@
+.img-size {
+    width: 45px;
+    height: 45px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.img-size-big {
+    width: 65px;
+    height: 65px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.p-box {
+    border: 2px solid #0c6efd75;
+    background-color: #ecf0f1;
+    padding: 0 20px;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+}

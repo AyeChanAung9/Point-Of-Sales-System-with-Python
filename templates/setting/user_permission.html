@@ -1,0 +1,141 @@
+{% extends 'layout/base.html' %}
+{% block title %}UserRole Permission{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/user_permission.css') }}" />
+{% endblock %}
+
+{% block content %}
+<p class="fs-6 mb-3 color-peru">
+    <a href="{{url_for('setting.get_role_management')}}">
+        <i class="fas fa-angle-double-left me-3"></i>UserRole Management
+    </a>
+</p>
+
+<input type="hidden" id="role_id" value="{{ role_id }}">
+<form onsubmit="save_user_permission(event)">
+    <div class="user_permission_page mt-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">{{role_name}} Role's Permissions</h6>
+                </div>
+                <div class="check-list">
+                    <div class="row">
+                        <div class="col col-lg-4"><b class="fs-6">Item</b></div>
+                        <div class="col"><label>Read</label>
+                            <input class="checkbox" type="checkbox" id="item_read">
+                        </div>
+                        <div class="col"><label>Write</label>
+                            <input class="checkbox" type="checkbox" id="item_write">
+                        </div>
+                        <div class="col"><label>Delete</label>
+                            <input class="checkbox" type="checkbox" id="item_delete">
+                        </div>
+                    </div>
+                </div>
+                <div class="check-list">
+                    <div class="row">
+                        <div class="col col-lg-4"><b class="fs-6">Category</b></div>
+                        <div class="col"><label>Read</label>
+                            <input class="checkbox" type="checkbox" id="category_read">
+                        </div>
+                        <div class="col"><label>Write</label>
+                            <input class="checkbox" type="checkbox" id="category_write">
+                        </div>
+                        <div class="col"><label>Delete</label>
+                            <input class="checkbox" type="checkbox" id="category_delete">
+                        </div>
+                    </div>
+                </div>
+                <div class="check-list">
+                    <div class="row">
+                        <div class="col col-lg-4"><b class="fs-6">Item Receive</b></div>
+                        <div class="col"><label>Read</label>
+                            <input class="checkbox" type="checkbox" id="item_receive_read">
+                        </div>
+                        <div class="col"><label>Write</label>
+                            <input class="checkbox" type="checkbox" id="item_receive_write">
+                        </div>
+                        <div class="col"><label>Delete</label>
+                            <input class="checkbox" type="checkbox" id="item_receive_delete">
+                        </div>
+                    </div>
+                </div>
+                <div class="check-list">
+                    <div class="row">
+                        <div class="col col-lg-4"><b class="fs-6">Damage/Loss</b></div>
+                        <div class="col"><label>Read</label>
+                            <input class="checkbox" type="checkbox" id="damage_loss_read">
+                        </div>
+                        <div class="col"><label>Write</label>
+                            <input class="checkbox" type="checkbox" id="damage_loss_write">
+                        </div>
+                        <div class="col"><label>Delete</label>
+                            <input class="checkbox" type="checkbox" id="damage_loss_delete">
+                        </div>
+                    </div>
+                </div>
+                <div class="check-list">
+                    <div class="row">
+                        <div class="col col-lg-4"><b class="fs-6">Sales</b></div>
+                        <div class="col"><label>Read</label>
+                            <input class="checkbox" type="checkbox" id="sales_read">
+                        </div>
+                        <div class="col"><label>Write</label>
+                            <input class="checkbox" type="checkbox" id="sales_write">
+                        </div>
+                        <div class="col"><label>Delete</label>
+                            <input class="checkbox" type="checkbox" id="sales_delete">
+                        </div>
+                    </div>
+                </div>
+                <div class="check-list">
+                    <div class="row">
+                        <div class="col col-lg-4"><b class="fs-6">Reports</b></div>
+                        <div class="col"><label>All</label>
+                            <input class="checkbox" type="checkbox" id="reports">
+                        </div>
+                    </div>
+                </div>
+                <div class="check-list">
+                    <div class="row">
+                        <div class="col col-lg-4"><b class="fs-6">User Management</b></div>
+                        <div class="col"><label>All</label>
+                            <input class="checkbox" type="checkbox" id="users">
+                        </div>
+                    </div>
+                </div>
+                <div class="check-list">
+                    <div class="row">
+                        <div class="col col-lg-4"><b class="fs-6">UserRole Management</b></div>
+                        <div class="col"><label>All</label>
+                            <input class="checkbox" type="checkbox" id="user_roles">
+                        </div>
+                    </div>
+                </div>
+                <div class="check-list">
+                    <div class="row">
+                        <div class="col col-lg-4"><b class="fs-6">UserRole Permissions</b></div>
+                        <div class="col"><label>All</label>
+                            <input class="checkbox" type="checkbox" id="user_permissions">
+                        </div>
+                    </div>
+                </div>
+                <div class="check-list">
+                    <div class="row">
+                        <div class="col col-lg-4"><b class="fs-6">Store Configuration</b></div>
+                        <div class="col"><label>All</label>
+                            <input class="checkbox" type="checkbox" id="store_configuration">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mb-3">
+                    <button type="submit pt-3" class="btn btn-outline-success">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="{{ url_for('static', filename='js/user_permission.js') }}"></script>
+{% endblock %}

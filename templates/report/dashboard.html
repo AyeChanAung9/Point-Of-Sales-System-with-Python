@@ -1,0 +1,160 @@
+{% extends 'layout/base.html' %}
+<h1>{% block title %}Sale Report{% endblock %}</h1>
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" />
+{% endblock %}
+{% block content %}
+<div class="container-fluid p-5">
+    <div class="col-xl-12 col-lg-7">
+        <div class="card shadow mb-3 ">
+            <div class="card-header d-flex align-items-center py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Sales Overview</h6>
+                <p class="ms-auto p-box rounded" id="dashboard_year"></p>
+            </div>
+
+            <div class="row p-2">
+                <div class="card-body col-xl-3">
+                    <div class="mx-3 mb-2 mt-2 text-center">
+                        <div class="card col text-center">
+                            <div class="card-body pb-2">
+                                <p class="card-text">Today</p>
+                                <h5 id="today_sales">0</p>
+                            </div>
+                        </div>
+                        <div class="card col mt-3 text-center">
+                            <div class="card-body pb-2">
+                                <p class="card-text">This Week</p>
+                                <h5 id="weekly_sales">0</p>
+                            </div>
+                        </div>
+                        <div class="card col mt-3 text-center">
+                            <div class="card-body pb-2">
+                                <p class="card-text">This Month</p>
+                                <h5 id="monthly_sales">0</p>
+                            </div>
+                        </div>
+                        <div class="card col mt-3 text-center">
+                            <div class="card-body pb-2">
+                                <p class="card-text">This Year</p>
+                                <h5 id="yearly_sales">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body col-xl-9">
+                    <div class="chart-area d-flex align-items-center">
+                        <canvas id="salesChartLine"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Inventory Overview</h6>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 d-flex align-items-center">
+                            <div class="card col ms-4">
+                                <img src="{{url_for('static', filename='/img/total-products.png')}}"
+                                    class="card-img-top img-size-big mt-4" alt="Total Products">
+                                <div class="card-body text-center pb-2">
+                                    <p class="card-text">Currently In-hand</p>
+                                    <h5 class="card-text" id="in_hand">0</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="card col mt-3 text-center me-4">
+                                <div class="card-body pb-2">
+                                    <div class="row my-2">
+                                        <div class="col-lg-5 center">
+                                            <img src="{{url_for('static', filename='/img/out-of-stock.png')}}"
+                                                class="card-img-top img-size" alt="Total Products">
+                                        </div>
+                                        <div class="col-lg-7 center">
+                                            <p class="card-text">Out of stock</p>
+                                            <h5 class="card-text" id="out_of_stock">0</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card col mt-3 mb-3 text-center me-4">
+                                <div class="card-body pb-2">
+                                    <div class="row my-2">
+                                        <div class="col-lg-5 center">
+                                            <img src="{{url_for('static', filename='/img/low-in-stock.png')}}"
+                                                class="card-img-top img-size" alt="Total Products">
+                                        </div>
+                                        <div class="col-lg-7 center">
+                                            <p class="card-text">Low in-stock</p>
+                                            <h5 class="card-text" id="low_in_stock">0</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-2 d-flex align-items-center">
+                        <h6 class="m-0 font-weight-bold text-primary">Inventory Movement</h6>
+                        <div class="ms-auto">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="yearDropdownForInvMovement" />
+                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 d-flex align-items-center">
+                            <div class="card col ms-4">
+                                <img src="{{url_for('static', filename='/img/total-products.png')}}"
+                                    class="card-img-top img-size-big mt-4" alt="Total Products">
+                                <div class="card-body text-center pb-2">
+                                    <p class="card-text">Sales</p>
+                                    <h5 class="card-text" id="sale_qty">0</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="card col mt-3 text-center me-4">
+                                <div class="card-body pb-2">
+                                    <div class="row my-2">
+                                        <div class="col-lg-5 center">
+                                            <img src="{{url_for('static', filename='/img/out-of-stock.png')}}"
+                                                class="card-img-top img-size" alt="Total Products">
+                                        </div>
+                                        <div class="col-lg-7 center">
+                                            <p class="card-text">Received</p>
+                                            <h5 class="card-text" id="item_receive_qty">0</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card col mt-3 mb-3 text-center me-4">
+                                <div class="card-body pb-2">
+                                    <div class="row my-2">
+                                        <div class="col-lg-5 center">
+                                            <img src="{{url_for('static', filename='/img/low-in-stock.png')}}"
+                                                class="card-img-top img-size" alt="Total Products">
+                                        </div>
+                                        <div class="col-lg-7 center">
+                                            <p class="card-text">Damage/Loss</p>
+                                            <h5 class="card-text" id="damage_loss_qty">0</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="module" src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

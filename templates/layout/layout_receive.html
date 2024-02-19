@@ -1,0 +1,56 @@
+{% extends 'layout/base_layout.html' %}
+
+{% block select_content %}
+<div class="col-xl-4 col-md-4 col-sm-4 mb-3">
+    <div class="input-group">
+        <input type="text" class="form-control fromDate" placeholder="From" aria-describedby="basic-addon2" id="from"
+            name="from" />
+        <span class="input-group-text btnFrom" id="basic-addon2"><i class="fa fa-calendar"></i></span>
+    </div>
+</div>
+<div class="col-xl-4 col-md-4 col-sm-4 mb-3">
+    <div class="input-group">
+        <input type="text" class="form-control toDate" placeholder="To" aria-describedby="basic-addon2" id="to"
+            name="to" />
+        <span class="input-group-text btnTo" id="basic-addon2"><i class="fa fa-calendar"></i></span>
+    </div>
+</div>
+{% endblock %}
+
+{% block add_form_content %}
+<div class="row justify-content-end mb-4">
+    <div class="col-lg-3 col-sm-4 text-center">
+        <a href="{% block form_url %}{% endblock %}" class="btn btn-primary" type="button"
+            id="{% block form_id %}{% endblock %}">{% block form_name %}{% endblock %}</a>
+    </div>
+</div>
+{% endblock %}
+{% block details_List_content %}
+<div class="row">
+    <div class="col-12 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary">{% block detail_list_title %}{% endblock %}<span
+                        class="detail_voucher_no"></span></h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataDetailTable" width="100%" cellspacing="0">
+                        <thead>
+                            {% block detail_table_header %}
+                            {% endblock %}
+                        </thead>
+                        <tfoot>
+                            {% block detail_table_footer %}
+                            {% endblock %}
+                        </tfoot>
+                        <tbody>
+                            {% block detail_table_body %}{% endblock %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

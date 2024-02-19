@@ -1,0 +1,123 @@
+{% extends 'layout/base.html' %}
+<h1>{% block title %}About Us{% endblock %}</h1>
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about_us_style.css') }}" />
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <h1>Our Team</h1>
+</div>
+<div class="row">
+  <!-- Column 1-->
+  <div class="column">
+    <div class="card">
+      <div class="img-container">
+        <img src="{{url_for('static', filename='/img/about_us/kaykay.jpg')}}" />
+      </div>
+      <h3>Khaing Lin Lin Htet</h3>
+      <p>Developer</p>
+      <div class="icons">
+        <a href="https://www.facebook.com/khinelinlinhtet?mibextid=ZbWKwL">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://github.com/WhiteBunny94">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="mailto:xuezhudeveloper@gmail.com">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Column 2-->
+  <div class="column">
+    <div class="card">
+      <div class="img-container">
+        <img src="{{url_for('static', filename='/img/about_us/eric.jpg')}}" />
+      </div>
+      <h3>Aye Chan Aung</h3>
+      <p>Developer</p>
+      <div class="icons">
+        <a href="https://www.facebook.com/profile.php?id=100011461283196&mibextid=LQQJ4d">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://github.com/AyeChanAung9">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="mailto:99lordofshadows@gmail.com">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <!-- Column 3-->
+  <div class="column">
+    <div class="card">
+      <div class="img-container">
+        <img src="{{url_for('static', filename='/img/about_us/htetnandar.jpg')}}" />
+      </div>
+      <h3>Htet Nandar</h3>
+      <p>Developer</p>
+      <div class="icons">
+        <a href="https://www.facebook.com/htetnandar.lily/">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://github.com/htet98">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="mailto:htetnandar.282198@gmail.com">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- Column 4-->
+  <div class="column">
+    <div class="card">
+      <div class="img-container">
+        <img src="{{url_for('static', filename='/img/about_us/thutazaw.jpg')}}" />
+      </div>
+      <h3>Thuta Zaw</h3>
+      <p>Developer</p>
+      <div class="icons">
+        <a href="https://www.facebook.com/zeyophite545">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://github.com/Thutazaw09">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="mailto:thutazaw9999@gmail.com">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Column 5-->
+  <div class="column">
+    <div class="card">
+      <div class="img-container">
+        <img src="{{url_for('static', filename='/img/about_us/phyoaungmon.jpg')}}" />
+      </div>
+      <h3>Phyo Aung Mon</h3>
+      <p>Developer</p>
+      <div class="icons">
+        <a href="https://www.facebook.com/profile.php?id=100008580344156">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://github.com/PhyoAungMon">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="mailto:phyoaungmon95.mm@gmail.com">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

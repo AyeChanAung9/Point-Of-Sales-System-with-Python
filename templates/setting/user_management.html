@@ -1,0 +1,62 @@
+{% extends 'layout/layout_setup.html' %}
+{% block title %}User{% endblock %}
+
+{% block heading %}User{% endblock %}
+{% block select_content %}
+<div class="col-lg-4 col-sm-4 mb-3">
+    <div class="input-group">
+        <label class="input-group-text" for="roleFilter"><i class="fa-solid fa-filter"></i></label>
+        <select class="form-select" aria-label="Filter select" id="roleFilter">
+            <option value="" selected> All UserRoles</option>
+            {% for role in roles %}
+            <option value="{{ role.role_id }}">{{ role.role_name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+{% endblock %}
+
+{% block form_title %}Add User{% endblock %}
+{% block hidden_id %}user_id{% endblock %}
+{% block form_content %}
+<div class="col-12 form-floating mb-3">
+    <input type="text" class="form-control" id="username" placeholder="UserName" required />
+    <label for="username" class="ps-4"><i class="fas fa-cubes"></i>&nbsp;&nbsp;
+        UserName</label>
+</div>
+<div class="col form-floating mb-3">
+    <input type="password" class="form-control" id="password" placeholder="password" required />
+    <label for="password" class="ps-4"><i class="fab fa-product-hunt"></i>&nbsp;&nbsp;
+        Password </label>
+</div>
+<div class="col form-floating mb-3">
+    <select class="form-select" id="role_id" style="padding-top: inherit;" required>
+        <option value="" selected>&#x29E9;-----User Roles-----</option>
+        {% for role in roles %}
+        <option value="{{ role.role_id }}">{{ role.role_name }}</option>
+        {% endfor %}
+    </select>
+</div>
+{% endblock %}
+
+{% block list_title %}User List{% endblock %}
+{% block table_header %}
+<tr>
+    <th>No</th>
+    <th>UserName</th>
+    <th>User Role</th>
+    <th>Action</th>
+</tr>
+{% endblock %}
+{% block table_footer %}
+<tr>
+    <th>No</th>
+    <th>UserName</th>
+    <th>User Role</th>
+    <th>Action</th>
+</tr>
+{% endblock %}
+{% block table_body %}{% endblock %}
+
+{% block js %}
+<script type="module" src="{{ url_for('static', filename='js/user.js') }}"></script>{% endblock %}

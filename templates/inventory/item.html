@@ -1,0 +1,86 @@
+{% extends 'layout/layout_setup.html' %}
+{% block title %}Item{% endblock %}
+
+{% block heading %}Item{% endblock %}
+{% block select_content %}
+<div class="col-lg-4 col-sm-4 mb-3">
+    <div class="input-group">
+        <label class="input-group-text" for="categoryFilter"><i class="fa-solid fa-filter"></i></label>
+        <select class="form-select" aria-label="Filter select" id="categoryFilter">
+            <option value="" selected> All Categories</option>
+            {% for category in categories %}
+            <option value="{{ category.category_id }}">{{ category.category_name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+{% endblock %}
+
+{% block form_title %}Add Item{% endblock %}
+{% block hidden_id %}item_id{% endblock %}
+{% block form_content %}
+<div class="col-12 col-xl-2 col-lg-4 col-sm-6 form-floating mb-3">
+    <input type="text" class="form-control" id="name" placeholder="Item Name" required />
+    <label for="name" class="ps-4"><i class="fas fa-cubes"></i>&nbsp;&nbsp; Item Name</label>
+</div>
+<div class="col-12 col-xl-2 col-lg-4 col-sm-6 form-floating mb-3">
+    <input type="text" class="form-control" id="product_code" placeholder="Item Code" required />
+    <label for="product_code" class="ps-4"><i class="fab fa-product-hunt"></i>&nbsp;&nbsp; Product Code</label>
+</div>
+<div class="col-12 col-xl-2 col-lg-4 col-sm-6 form-floating mb-3">
+    <input type="number" class="form-control text-end" min="0" value=0 id="cost_price" pattern="[0-9]*"
+        placeholder="Price" required />
+    <label for="price" class="ps-4"><i class="fas fa-tags"></i>&nbsp;&nbsp; Cost Price</label>
+</div>
+<div class="col-12 col-xl-2 col-lg-4 col-sm-6 form-floating mb-3">
+    <input type="number" class="form-control text-end" min="0" value=0 id="price" pattern="[0-9]*" placeholder="Price"
+        required />
+    <label for="price" class="ps-4"><i class="fas fa-tags"></i>&nbsp;&nbsp; Selling Price</label>
+</div>
+<div class="col-12 col-xl-2 col-lg-4 col-sm-6 form-floating mb-3">
+    <input type="number" class="form-control text-end" min="0" value=0 id="reorder" pattern="[0-9]*"
+        placeholder="Re-Order Limit" required />
+    <label for="reorder" class="ps-4"><i class="fa-solid fa-retweet"></i>&nbsp;&nbsp; Re-Order Limit</label>
+</div>
+<div class="col-12 col-xl-2 col-lg-4 col-sm-6 form-floating mb-3">
+    <select class="form-select" id="category_id" style="padding-top: inherit;" required>
+        <option value="" selected>&#x29E9;-----Category-----</option>
+        {% for category in categories %}
+        <option value="{{ category.category_id }}">{{ category.category_name }}</option>
+        {% endfor %}
+    </select>
+</div>
+{% endblock %}
+
+{% block list_title %}Item List{% endblock %}
+{% block table_header %}
+<tr>
+    <th>No</th>
+    <th>Name</th>
+    <th>Product Code</th>
+    <th class="text-end">Cost Price</th>
+    <th class="text-end">Selling Price</th>
+    <th class="text-end">Re-Order Limit</th>
+    <th>Category</th>
+    <th class="text-end">Current Stock</th>
+    <th>Action</th>
+</tr>
+{% endblock %}
+{% block table_footer %}
+<tr>
+    <th>No</th>
+    <th>Name</th>
+    <th>Product Code</th>
+    <th class="text-end">Cost Price</th>
+    <th class="text-end">Selling Price</th>
+    <th class="text-end">Re-Order Limit</th>
+    <th>Category</th>
+    <th class="text-end">Current Stock</th>
+    <th>Action</th>
+</tr>
+{% endblock %}
+{% block table_body %}{% endblock %}
+
+
+{% block js %}
+<script type="module" src="{{ url_for('static', filename='js/item.js') }}"></script>{% endblock %}

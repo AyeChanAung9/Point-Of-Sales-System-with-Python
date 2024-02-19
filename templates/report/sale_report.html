@@ -1,0 +1,276 @@
+{% extends 'layout/base.html' %}
+<h1>{% block title %}Sale Report{% endblock %}</h1>
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/sale_report.css') }}" />
+{% endblock %}
+{% block content %}
+<div id="stickySearchForm">
+    <div class="row">
+        <div class="col-xl-6 col-md-12 mb-3">
+            <div class="card border-left-primary shadow h-100">
+                <div class="card-body">
+                    <form action="" id="searchForm">
+                        <div class="d-flex">
+                            <div class="form-check form-check-inline mt-1">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="daily"
+                                    value="daily">
+                                <label class="form-check-label" for="daily">Daily</label>
+                            </div>
+                            <div class="form-check form-check-inline mt-1">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="weekly"
+                                    value="weekly">
+                                <label class="form-check-label" for="weekly">Weekly</label>
+                            </div>
+                            <div class="form-check form-check-inline mt-1">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="monthly"
+                                    value="monthly">
+                                <label class="form-check-label" for="monthly">Monthly</label>
+                            </div>
+                            <div class="input-group me-3" id="from_to_date" style="display: none;">
+                                <input type="text" class="form-control fromDate" placeholder="From"
+                                    aria-describedby="basic-addon2" id="from" name="from" />
+                                <span class="input-group-text btnFrom me-2" id="basic-addon2"><i
+                                        class="fa fa-calendar"></i></span>
+                                <input type="text" class="form-control toDate" placeholder="To"
+                                    aria-describedby="basic-addon2" id="to" name="to" />
+                                <span class="input-group-text btnTo me-2" id="basic-addon2"><i
+                                        class="fa fa-calendar"></i></span>
+                            </div>
+                            <div class="input-group me-3" id="weekly_select" style="display: none;">
+                                <select class="form-select" id="yearDropdown">
+                                    {% for item in years %}
+                                    <option value="{{ item.year }}">{{ item.year }}</option>
+                                    {% endfor %}
+                                </select>
+                                <select class="form-select" id="monthDropdown">
+                                    <option value=''>--Select Month--</option>
+                                    <option selected value='01'>Janaury</option>
+                                    <option value='02'>February</option>
+                                    <option value='03'>March</option>
+                                    <option value='04'>April</option>
+                                    <option value='05'>May</option>
+                                    <option value='06'>June</option>
+                                    <option value='07'>July</option>
+                                    <option value='08'>August</option>
+                                    <option value='09'>September</option>
+                                    <option value='10'>October</option>
+                                    <option value='11'>November</option>
+                                    <option value='12'>December</option>
+                                </select>
+                            </div>
+                            <div class="me-3" id="monthly_select" style="display: none;">
+                                <select class="form-select" id="yearDropdown_for_monthly">
+                                    {% for item in years %}
+                                    <option value="{{ item.year }}">{{ item.year }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-primary" type="submit" id="searchButton">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-12 divCollapse">
+        <div class="card shadow text-center mb-4">
+            <div class="card-header text-primary">
+                Total Sales Per Item & Total Sales Per Category
+            </div>
+            <div class="card-body">
+                <span class="card-text">Click on the points of <b>"Total Sale Chart"</b> <br>to view <br> <b>"Total
+                        Sales Per Item & Total Sales Per Category"</b>.</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-12 divTotalSales">
+        <div class="card shadow mb-4">
+            <div class="card-header d-flex">
+                <h6 class="m-1 font-weight-bold text-primary">Total Sales Chart</h6>
+                <input type="hidden" id="yearForTotalSales">
+            </div>
+            <div class="card-body">
+                <canvas id="totalSales" class="mb-3"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-4 col-lg-12" id="divBarChart" style="display: none;">
+        <div class="card shadow mb-4">
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary">Total Sales Item</h6>
+            </div>
+            <div class="card-body">
+                <canvas id="barChart" class="mb-3"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-12" id="divCategoriesChart" style="display: none;">
+        <div class="card shadow mb-4">
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary">Total Sales Category</h6>
+            </div>
+            <div class="card-body">
+                <canvas id="categoriesChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="row">
+    <div class="col-xl-6 col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header d-flex">
+                <h6 class="m-0 font-weight-bold text-primary">Sale Growth, year-over-year</h6>
+                <p class="ms-auto rounded" id="saleGrowthYear"></p>
+            </div>
+            <div class="card-body">
+                <canvas id="saleGrowth" class="mb-3"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header d-flex">
+                <h6 class="m-0 font-weight-bold text-primary">Quarterly Sale By Product</h6>
+                <p class="ms-auto rounded" id="productWiseYear"></p>
+            </div>
+            <div class="card-body">
+                <canvas id="quarterlySalesChart" class="mb-3"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-6 col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary">Quantity Sold by Category</h6>
+            </div>
+            <div class="card-body">
+                <canvas id="qtySoldCategory" class="mb-3"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary">Revenue by Category</h6>
+            </div>
+            <div class="card-body">
+                <canvas id="revenueCategory" class="mb-3"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-6 col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary">Quantity Sold by Product</h6>
+            </div>
+            <div class="card-body">
+                <canvas id="qtySoldItem" class="mb-3"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary">Revenue by Product</h6>
+            </div>
+            <div class="card-body">
+                <canvas id="revenueItem" class="mb-3"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-6 col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header  ">
+                <h6 class="font-weight-bold text-primary">Top Selling Products</h6>
+            </div>
+            <div class="card-body py-1">
+                <div class="table-responsive">
+                    <table class="table table-borderless table-hover">
+                        <thead class="table-primary">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Category</th>
+                                <th class="text-end" scope="col">Qty</th>
+                                <th class="text-end" scope="col">Price</th>
+                                <th class="text-end" scope="col">Total Sales</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblTotalSales">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header  ">
+                <h6 class="m-0 font-weight-bold text-primary">Daily Sale Report</h6>
+            </div>
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="ms-auto">
+                        <div class="row mb-2">
+                            <div class="col-auto">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="yearDropdownForSaleReport" />
+                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-outline-success" id="btnDownloadCSV" title="download"><i
+                                        class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-borderless table-hover" id="tblDailySaleReport">
+                        <thead class="table-primary">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Voucher No</th>
+                                <th scope="col">Product</th>
+                                <th scope="col">Category</th>
+                                <th class="text-end" scope="col">Qty</th>
+                                <th class="text-end" scope="col">Discount</th>
+                                <th class="text-end" scope="col">Item Price</th>
+                                <th class="text-end" scope="col">Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dailySaleReport">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+{% block js %}
+<script src="{{ url_for('static', filename='js/datepicker.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/sale_report.js') }}"></script>
+{% endblock %}
